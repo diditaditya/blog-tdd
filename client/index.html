@@ -14,46 +14,48 @@
 
   <div id="main">
 
-    <nav class="row container-fluid bg-success">
-      <navbar :title="title"></navbar>
+    <nav class="container bg-success">
+      <div class="row">
+        <navbar :title="title"></navbar>
+      </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <side-bar :posts="posts"></side-bar>
         <post :selected="selected"></post>
       </div>
     </div>
 
-    <!-- VUE COMPONENTS TEMPLATES -->
-
-    <!-- NAV-BAR TEMPLATE -->
-    <template id="nav-bar">
-      <h2>{{ title }}</h2>
-    </template>
-
-    <!-- SIDE-BAR TEMPLATE -->
-    <template id="side-bar">
-      <div class="col-md-2 bg-warning side-bar">
-        <ul>
-          <li v-for="post in posts">{{ post.title }}</li>
-        </ul>
-      </div>
-    </template>
-
-    <!-- POST TEMPLATE -->
-    <template id="post-template">
-      <div class="col-md-10">
-        <div>
-          <h1>{{ selected.title }}</h1>
-          <h4>{{ selected.author }}</h4>
-          <p>{{ selected.content }}</p>
-        </div>
-      </div>
-    </template>
-
-
   </div>
+
+  <!-- VUE COMPONENTS TEMPLATES -->
+
+  <!-- NAV-BAR TEMPLATE -->
+  <template id="nav-bar">
+    <h2 class="text-center">{{ title }}</h2>
+  </template>
+
+  <!-- SIDE-BAR TEMPLATE -->
+  <template id="side-bar">
+    <div class="col-md-3 bg-warning side-bar">
+      <h3 class="text-center">List of Posts</h3>
+      <ul>
+        <li v-for="(post, index) in posts" v-on:click="$parent.selectPost(index)"><span class="btn btn-link">{{ post.title }}</span></li>
+      </ul>
+    </div>
+  </template>
+
+  <!-- POST TEMPLATE -->
+  <template id="post-template">
+    <div class="col-md-9">
+      <div>
+        <h1>{{ selected.title }}</h1>
+        <h4>{{ selected.author }}</h4>
+        <p>{{ selected.content }}</p>
+      </div>
+    </div>
+  </template>
 
 <script src="./script/index.js"></script>
 
